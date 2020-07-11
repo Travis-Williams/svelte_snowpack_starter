@@ -1,10 +1,16 @@
 {
   "scripts": {
+    "build:snowpack": "snowpack build",
+    "build:tailwind": "NODE_ENV=production postcss public/tailwind.css -o public/index.css",
+    "build": "npm run build:tailwind && npm run build:snowpack -c",
     "start": "snowpack dev",
-    "build": "snowpack build",
-    "test": "jest"
+    "dev": "concurrently \"npm run start\" \"npm run watch:tailwind\"",
+    "test": "jest",
+    "watch:tailwind": "postcss public/tailwind.css -o public/index.css -w"
   },
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "^2.3.0",
+    "concurrently": "^5.2.0",
     "svelte": "^3.21.0"
   },
   "devDependencies": {
@@ -12,6 +18,8 @@
     "@testing-library/jest-dom": "^5.5.0",
     "@testing-library/svelte": "^3.0.0",
     "jest": "^25.4.0",
-    "snowpack": "^2.6.4"
+    "postcss-cli": "^7.1.1",
+    "snowpack": "^2.6.4",
+    "tailwindcss": "^1.4.6"
   }
 }
